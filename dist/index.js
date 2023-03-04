@@ -1,3 +1,4 @@
+"use strict";
 // TIPO ANY
 /*
 
@@ -7,15 +8,15 @@ let price = 40
 let item = 'apple'
 let inStore = true
 
-let value: 
+let value:
 value = 10
 value = 'Andre'
 
 ---------------------------------
-ARRAY 
+ARRAY
 
 
-let value: number[] = [10, 20, 30, 'a'] 
+let value: number[] = [10, 20, 30, 'a']
 Aqui foi especificado que seria apenas numbers e não pode a strin 'a'
 
 
@@ -132,7 +133,7 @@ console.log(combineName)
 
 
 -----------------------------------------------------------------
-LITERAL type 
+LITERAL type
 
 let produtoPreco: 50
 produtoPreco = 50
@@ -193,7 +194,7 @@ members[0] = 12345;
 
 console.log(members);
 
-*/
+
 
 // Day 3 - Exercise 5
 
@@ -203,3 +204,53 @@ const stringsAndNumbers: (number | string)[] = [1, 'one', 2, 'two', 3, 'three'];
 const allMyArrays: (number | string)[][] = [sequence, animals, stringsAndNumbers];
 
 console.log(allMyArrays);
+
+-----------------------------------------------
+TSC --WATCH
+
+Para os arquivos serem mostrado imediatamente no console, basta no terminal digitar: tsc --watch
+Mas antes verifique se as configurações anteriores foram feitas:
+Em * Modules * "rootDir":"nome da pasta que contém os arquivos que vai ser compilado"
+Em * Emit * "outDir":"Aqui será indicado o arquivo JS, faça uma pasta e coloque separado"
+Em *Type checking* tira as barras de comentário do "Strict": true e coloque como true caso não esteja
+No "noEmitOnError" tirar as barras de comentario e deixar true.
+
+Para cancelar o watch é só apertar ctrl+c
+
+-------------------------------------------------------
+INCLUDE E EXCLUDE
+
+Para 'excluir' o arquivo ou seja deixar de fora do console, basta ir no arquivo 'tsconfig.json'
+e antes da última chave colocar o seguinte: "exclude": ["nome da pasta/arquivo"] para excluir do console
+o arquivo que deseja.
+
+---------------------------------------------------------
+O TARGET
+
+O target fica no tsconfig.json nele você poderá verificar e trocar a versão do seu javascript (EC2016 - EC2020)
+caso queira alterar a versão, basta escolher as opções que aparece quando você clica ou colocar manualmente
+
+------------------------------------------------------
+SOURCE MAPS
+
+Serve para quando for debugar, buscar erros na aplicação. Para habilitar basta fazer o seguinte:
+tsconfig.json tirar as barras de comentários em "Source Maps"
+
+---------------------------------------------------------
+REMOVENDO COMENTS
+
+Para remover os comentários do arquivo JS e deixar apenas no TS. Ou seja, você comenta os códigos no TS e
+não vai aparecer no JS para deixar mais CLEAN o arquivo JS.
+
+--------------------------------------------------------------
+ROOTDIR E OUTDIR
+
+Para criar ou organizar as pastas no vscode
+
+    SCR - vau conter os arquivos finais da aplicação e na configuração do tsconfig.json em Modules no
+    RootDit colocar a pasta "src"
+
+    DIST - ficam os arquivos JS, no EMIT em OutDir colocar a pasta DIST
+
+
+*/ 

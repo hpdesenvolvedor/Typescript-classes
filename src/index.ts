@@ -533,4 +533,105 @@ user.id = 5 // nao pode mudar
 
 console.log(`User:`, user)
 
+
+---------------------------------
+ReadOnly
+Você consegue acessar mas não consegue alterar, já com PRIVATE você não consegue nem acessar e nem mudar
+
+class Movies {
+    readonly id: number
+    name: string
+
+    constructor(id: number, name: string) {
+        this.id = id
+        this.name = name
+    }
+}
+
+let movie1 = new Movies(1, "Dejavu")
+movie1.id = 7
+console.log(movie1)
+
+
+-------------------------------------------
+PARAMETRO DE CONSTRUTOR
+
+class Movies {
+    constructor(readonly id: number, public name: string, private _price: number) {
+       
+    }
+}
+
+let movie1 = new Movies(1, "Dejavu", 20)
+console.log(movie1)
+
+-------------------------------------------
+INDEX SIGNATURES
+Para quando quiser criar uma classe e criar a propriedade apenas depois
+
+class HotelRooms {
+    [roonNumber: string]: string
+}
+
+let room = new HotelRooms()
+
+room.A201 = 'Andre'
+room.A202 = 'Ana'
+room.A17 = 'Marcos'
+
+console.log(room)
+
+
+-------------------------------------------
+INHERITANCE
+De uma classe padrão consegue acessar, pegar as informações com outras menores
+
+class Person {
+  
+    constructor (public firstName: string, public lastName: string, public age: number){}
+
+    greet(){
+        console.log('Hi')
+    }
+}
+
+class Clients extends Person {
+    balance(){
+        console.log('You balance is $120')
+    }
+}
+console.log(Clients)
+
+-------------------------------------------
+OVERRIDING
+Serve para você pegar o metodo que esta no padrao e nos child para poder escrever em cima, troca partes dele ou ele completo
+
+
+class Person {
+    constructor(public firstName: string, public lastName: string, public age: number){}
+
+    get greet(){
+        return this.firstName + ' ' + this.lastName
+    }
+}
+
+// Cliente do banco
+class Clients extends Person {
+    override get greet() {
+        return 'Dear ' + super.greet
+    }
+}
+
+// Funcionario do banco
+class Staff extends Person {
+    override get greet() {
+        return 'Hi ' + super.greet
+    }
+}
+
+let cliente1 = new Clients('Joao', 'Pedro', 25)
+let staff1 = new Staff('Ana', 'Clara', 22)
+
+console.log(cliente1)
+console.log(staff1)
 */

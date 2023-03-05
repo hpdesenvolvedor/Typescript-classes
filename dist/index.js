@@ -252,5 +252,286 @@ Para criar ou organizar as pastas no vscode
 
     DIST - ficam os arquivos JS, no EMIT em OutDir colocar a pasta DIST
 
+----------------------------------------------
+noEmitOnError
+
+Serve para caso você queira ignorar o erro do código e que ele vá para o JS mesmo errado mas para isso
+precisa deixar ele no FALSE. Ex.:
+
+tsconfig.json > Emit > "noEmitOnError: false"
+
+---------------------------------------------------
+STRICT E IMPLICIT ANY
+
+Quandoi no tsconfig em type cheking em "strict:true" você deixa true, isso habilita todos abaixo
+que sejam strick com true e caso queira tirar algum especifico, basta tirar o comentário e colocar com false aquela
+regra específica
+
+---------------------------------------------------------------
+UNUSED LOCALS
+
+Serve para verificar variáveis dentro da função que não estão sendo utilizadas, ou códigos desnecessários
+para aquela aplicação, deixando mais clean. Ex.:
+
+funtions moeda (valor: number, cor: string) {
+    let europa: 'londres'
+    console.log(valor)
+}
+
+Veja que a variável "europa" não está sendo utilizada
+--------------------------------------------------------------------
+UNUSED LOCALS
+
+Serve para verificar os parametros dentro da função que não estão sendo utilizadas. Ex.:
+
+funtions moeda (valor: number, cor: string) {
+    console.log(valor)
+}
+
+Veja que a "cor" não está sendo utilizada
+
+
+------------------------------------------------------
+CLASSES
+
+class Cliente {
+    nome: string
+    idade: number
+
+    constructor(n: string, i: number) {
+        this.nome = n
+        this.idade = i
+    }
+}
+
+const cliente1 = new Cliente('Henrique', 30)
+const cliente2 = new Cliente('Joao', 25)
+console.log(cliente1)
+console.log(cliente2)
+
+
+class Carros {
+    nome: string
+    ano: number
+    marca: string
+
+    constructor (n: string, a: number, m: string){
+        this.nome = n
+        this.ano = a
+        this.marca = m
+    }
+}
+
+const cliente1 = new Carros('HRV', 2020, 'Honda')
+
+console.log(cliente1)
+
+
+class Imoveis {
+    tipo: string
+    valor: number
+
+    constructor(t: string, v: number) {
+        this.tipo = t
+        this.valor = v
+    }
+}
+
+const cliente1 = new Imoveis('Apartamento', 300.000)
+
+console.log(cliente1)
+
+
+class Cliente {
+    nome: string
+    balanco: number
+
+    constructor(n: string, i: number) {
+        this.nome = n
+        this.balanco = i
+    }
+
+    addDinheiro(dinheiro: number){
+        this.balanco += dinheiro
+    }
+}
+
+const cliente1 = new Cliente('Henrique', 30)
+cliente1.addDinheiro(100)
+
+const cliente2 = new Cliente('Joao', 25)
+console.log(cliente1)
+console.log(cliente2)
+
+
+----------------------------------------
+CRIANDO OBJETO COM MÉTODO
+
+
+class Empresa {
+    nome: string
+    valor: number
+
+    constructor(n: string, v: number){
+        this.nome = n
+        this.valor = v
+    }
+
+    addDinheiro(adicionar: number){
+        this.valor += adicionar
+    }
+}
+
+const cliente1 = new Empresa ('Lotus', 300)
+cliente1.addDinheiro(400)
+
+console.log(cliente1)
+
+
+---------------------------------------
+PROPERTIES PUBLIC E PRIVATE
+
+class Empresa {
+    nome: string
+    private valor: number = 0            Aqui você só pode alterar dentro do objeto e colocar o valor inicial que deseja
+
+    constructor(n: string, v: number){
+        this.nome = n
+        this.valor = v
+    }
+
+    addDinheiro(adicionar: number){
+        this.valor += adicionar
+    }
+}
+
+const cliente1 = new Empresa ('Lotus', 300)
+cliente1.addDinheiro(400)
+
+console.log(cliente1)
+
+
+interface Item {
+    name: string
+    price: number
+
+    itemPurchased(message: string): void
+}
+
+let product1 = {
+    name: 'Apple',
+    price: 2,
+
+    itemPurchased(message: string) {
+        console.log(message + ' ' + this.name)
+    }
+}
+
+product1.itemPurchased('Você compro uma')
+
+------------------------------------------------------
+EXERCÍCIOS 1 - INTERFACE
+
+interface CartItem {
+    id: number
+    title: string
+    variantId?: number      //colocando a interrogração fica opcional a declaração do valor no console
+
+}
+
+
+
+function addToCart(item: CartItem){
+     
+    console.log(`Adding "${item.title}" to cart.`);
+  }
+
+  addToCart({id: 1, title: 'shoes'});
+
+----------------------------------------
+EXERCÍCIO 2 - CLASSE e INTERFACE
+
+interface Pessoa {
+    name: string
+    age: number
+}
+
+class Person implements Pessoa{
+
+    constructor(public name: string, public age: number) {}
+  }
+
+  const jane = new Person('Henrique', 31);
+
+  console.log(`${jane.name} is ${jane.age} years old.`);
+
+----------------------------------------
+EXERCÍCIO 3 - COLOCANDO STRING
+
+
+class MC {
+
+
+    greet(event: string = 'party'): string {
+      return `Welcome to the ${event}`;
+    }
+  }
+
+  const mc = new MC();
+  console.log(mc.greet('show1'));
+
+
+----------------------------------------
+EXERCÍCIO 4 - DEIXANDO O CÓDIGO EM UMA LINHA
+
+
+class Employee {
+    title: string;
+    salary: number;
+    constructor(title: string, salary: number) {
+      this.title = title;
+      this.salary = salary;
+    }
+  }
+
+  const employee = new Employee('Engineer', 100000);
+
+  console.log(`The new employee's title is ${employee.title} and they earn $ ${employee.salary}.`);
+
+  RESPOSTA:
+
+class Employee {
+  
+    constructor(public title: string, public salary: number) {
+     
+    }
+  }
+
+  const employee = new Employee('Engineer', 100000);
+
+  console.log(`The new employee's title is ${employee.title} and they earn $ ${employee.salary}.`);
+
+
+----------------------------------------
+EXERCÍCIO 4 - DEIXANDO O CÓDIGO EM UMA LINHA
+
+
+interface UserSchema {
+    id: number
+    name: string
+}
+
+class User implements UserSchema {
+    constructor(public name: string, readonly id: number) {}  //colocar o readonly para que a propriedade não seja alterada depois
+}
+
+const user = new User('Dog', 1)
+
+console.log(user.id)
+
+user.name = 'Harold' // pode mudar
+user.id = 5 // nao pode mudar
+
+console.log(`User:`, user)
 
 */ 
